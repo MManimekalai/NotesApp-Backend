@@ -20,12 +20,17 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(cors());
 
+// Define a simple route for testing
+app.get('/', (req, res) => {
+    res.send('Hello, World!');
+  });
+
 //Connecting DB
 connectDB();
 
 //routes
-//app.use("/user",userRouter);
-//app.use("/notes",notesRouter);
+app.use("/user",userRouter);
+app.use("/notes",notesRouter);
 
 //server connection
 app.listen(PORT,()=>console.log(`Server listening on ${PORT}`));
