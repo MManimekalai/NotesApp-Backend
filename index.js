@@ -17,12 +17,12 @@ let PORT=process.env.PORT;
 //Middlewares
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-//app.use(cors());
-app.use(cors({
-    origin: 'https://mmurugesan-remindify.netlify.app/', // Allow requests from your local frontend
-    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-    // allowedHeaders: 'Content-Type,Authorization,x-auth, id',
-  }));
+app.use(cors());
+// app.use(cors({
+//     origin: 'https://mmurugesan-remindify.netlify.app/', // Allow requests from your local frontend
+//     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+//     allowedHeaders: 'Content-Type,Authorization,x-auth, id',
+//   }));
 
 
 // Define a simple route for testing
