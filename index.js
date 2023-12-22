@@ -2,6 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const dotenv = require('dotenv');
 const bodyParser = require('body-parser');
+const {connectDB} = require('./db.js')
 const dbConnection = require('./db.js')
 const notesRouter = require('./Routes/notesRoutes.js')
 const userRouter = require('./Routes/userRoutes.js')
@@ -20,7 +21,7 @@ app.use(bodyParser.json());
 app.use(cors());
 
 //Connecting DB
-dbConnection();
+connectDB();
 
 //routes
 //app.use("/user",userRouter);
