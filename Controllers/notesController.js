@@ -1,8 +1,12 @@
-const { User, decodeJwtToken } = require("../Models/User.js");
-const { Notes } = require("../Models/Notes.js");
+const User = require("../Models/User.js");
+const  Notes  = require("../Models/Notes.js");
 const { MailSender } = require("../mailer.js");
+const {connectDB} = require('../db.js')
+const jwt = require('jsonwebtoken')
+
 
 const addNotes = async (req, res) => {
+  await connectDB()
   try {
     let token = req.headers["x-auth"];
     let userId = decodeJwtToken(token);
@@ -25,6 +29,7 @@ const addNotes = async (req, res) => {
 };
 
 const getNotesDataById = async (req, res) => {
+  await connectDB()
   try {
     let token = req.headers["x-auth"];
     let userId = decodeJwtToken(token);
@@ -43,6 +48,7 @@ const getNotesDataById = async (req, res) => {
 };
 
 const getAllNotes = async (req, res) => {
+  await connectDB()
   try {
     let token = req.headers["x-auth"];
     let userId = decodeJwtToken(token);
@@ -63,6 +69,7 @@ const getAllNotes = async (req, res) => {
 };
 
 const updateNotes = async (req, res) => {
+  await connectDB()
   try {
     let token = req.headers["x-auth"];
     let userId = decodeJwtToken(token);
@@ -90,6 +97,7 @@ const updateNotes = async (req, res) => {
 };
 
 const updateStatus = async (req, res) => {
+  await connectDB()
   try {
     let token = req.headers["x-auth"];
     let userId = decodeJwtToken(token);
@@ -117,6 +125,7 @@ const updateStatus = async (req, res) => {
 };
 
 const deleteNotes = async (req, res) => {
+  await connectDB()
   try {
     let token = req.headers["x-auth"];
     let userId = decodeJwtToken(token);
@@ -135,6 +144,7 @@ const deleteNotes = async (req, res) => {
 };
 
 const sendReminders = async (req, res) => {
+  await connectDB()
   try {
     let token = req.headers["x-auth"];
     let userId = decodeJwtToken(token);
@@ -166,6 +176,16 @@ const sendReminders = async (req, res) => {
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: "Internal Server Error" });
+  }
+};
+
+const decodeJwtToken = (token) => {
+  try {
+    let decoded = jwt.verify(token, process.env.SECRET_KEY);
+    return decoded.id;
+  } catch (error) {
+    console.error("Error in Jwt Decoding", error);
+    return null;
   }
 };
 

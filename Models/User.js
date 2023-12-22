@@ -21,21 +21,21 @@ let userSchema = new mongoose.Schema({
   },
 });
 
-//Generate JWT token
-let generateJwtToken = (id) => {
-  return jwt.sign({ id }, process.env.SECRET_KEY);
-};
+// //Generate JWT token
+// let generateJwtToken = (id) => {
+//   return jwt.sign({ id }, process.env.SECRET_KEY);
+// };
 
-//Decode Jwt Token
-const decodeJwtToken = (token) => {
-  try {
-    let decoded = jwt.verify(token, process.env.SECRET_KEY);
-    return decoded.id;
-  } catch (error) {
-    console.error("Error in Jwt Decoding", error);
-    return null;
-  }
-};
+// //Decode Jwt Token
+// const decodeJwtToken = (token) => {
+//   try {
+//     let decoded = jwt.verify(token, process.env.SECRET_KEY);
+//     return decoded.id;
+//   } catch (error) {
+//     console.error("Error in Jwt Decoding", error);
+//     return null;
+//   }
+// };
 
 let User = mongoose.model("User", userSchema);
-module.exports = { User, generateJwtToken, decodeJwtToken };
+module.exports = User

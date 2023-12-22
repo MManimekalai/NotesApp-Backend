@@ -3,7 +3,6 @@ const cors = require('cors');
 const dotenv = require('dotenv');
 const bodyParser = require('body-parser');
 const {connectDB} = require('./db.js')
-const dbConnection = require('./db.js')
 const notesRouter = require('./Routes/notesRoutes.js')
 const userRouter = require('./Routes/userRoutes.js')
 
@@ -18,7 +17,13 @@ let PORT=process.env.PORT;
 //Middlewares
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-app.use(cors());
+//app.use(cors());
+app.use(cors({
+    origin: 'http://localhost:3001', // Allow requests from your local frontend
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+    allowedHeaders: 'Content-Type,Authorization,x-auth, id',
+  }));
+
 
 // Define a simple route for testing
 app.get('/', (req, res) => {

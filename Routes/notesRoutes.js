@@ -13,7 +13,7 @@ let router = express.Router();
 
 router.post("/add-notes", addNotes);
 router.get("/get-notes-data-by-id", getNotesDataById);
-router.get("/get-all-notes", getAllNotes);
+router.get("/note/get-all-notes", getAllNotes);
 router.put("/update-notes", updateNotes);
 router.put("/update-status", updateStatus);
 router.delete("/delete-notes", deleteNotes);
